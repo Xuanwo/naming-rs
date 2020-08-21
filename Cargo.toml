@@ -1,0 +1,10 @@
+[package]
+name = "naming"
+version = "0.1.0"
+authors = ["Xuanwo <github@xuanwo.io>"]
+edition = "2018"
+description = "transform naming into different cases for code generation"
+license = "MIT"
+
+[dependencies]
+lazy_static = "1.4.0"
