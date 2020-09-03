@@ -258,16 +258,6 @@ pub fn to_snack(s: &str) -> String {
     split_string_in_parts(s).join("_")
 }
 
-pub trait ToKebab {
-    fn to_kebab(&self) -> String;
-}
-
-impl ToKebab for String {
-    fn to_kebab(&self) -> String {
-        to_kebab(&self)
-    }
-}
-
 /// Convert string to kebab case.
 pub fn to_kebab(s: &str) -> String {
     split_string_in_parts(s).join("-")
@@ -287,6 +277,27 @@ pub fn to_upper_first(s: &str) -> String {
 
     String::from_iter(x)
 }
+
+macro_rules! declare_trait {
+    ($name:ident, $value:ident) => {
+        pub trait $name {
+            fn $value(&self) -> String;
+        }
+
+        impl $name for String {
+            fn $value(&self) -> String {
+                $value(&self)
+            }
+        }
+    }
+}
+
+declare_trait!(ToKebab, to_kebab);
+declare_trait!(ToCamel, to_camel);
+declare_trait!(ToPascal, to_pascal);
+declare_trait!(ToSnack, to_snack);
+declare_trait!(ToUpper, to_upper);
+declare_trait!(ToUpperFirst, to_upper_first);
 
 #[cfg(test)]
 mod tests;
